@@ -3,7 +3,7 @@ We kindly ask you to solve the task below. By solving and submitting this assign
 
 ## The task
 
-Implement in Pixi.js a scene featuring the background in "background.png". Implement in the scene the green guy in "guy.png" and let him appear at the "Start" spot. Make an animation which causes the guy to traverse the black path until he reaches the "Goal" spot. Add a button to the scene which causes the guy to change destination so he will instead traverse the path back towards the start. Repeatedly clicking the button should make the guy alternate between moving towards the start and the goal while still adhering to the black path.
+Implement in Pixi.js a scene featuring the background in "background.png". Implement in the scene the green guy in "guy.png" and let him appear at the "Start" spot. Make an animation which causes the guy to traverse the black path until he reaches the "Goal" spot. Add a button to the scene which causes the guy to change destination to the "Start" spot. Repeatedly clicking the button should make the guy alternate between moving towards the start and the goal.
 
 - Use Pixi.js as the language. Feel free to use plugins you deem appropriate.
 
