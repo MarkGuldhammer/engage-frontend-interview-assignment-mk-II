@@ -12,6 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "pixi-tween": "^0.2.0",
     "pixi.js": "^5.0.0-rc.2"
   }
 }
