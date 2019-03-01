@@ -1,0 +1,17 @@
+{
+  "name": "engage-frontend-interview-assignment-mk-ii",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarkGuldhammer/engage-frontend-interview-assignment-mk-II.git"
+  },
+  "author": "Mark Guldhammer",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "pixi.js": "^5.0.0-rc.2"
+  }
+}
