@@ -13,6 +13,6 @@
   },
   "dependencies": {
     "pixi-tween": "^0.2.0",
-    "pixi.js": "^5.0.0-rc.2"
+    "pixi.js": "^4.1.0"
   }
 }
