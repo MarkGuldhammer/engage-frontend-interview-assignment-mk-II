@@ -1,7 +1,7 @@
 {
   "name": "engage-frontend-interview-assignment-mk-ii",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.html",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MarkGuldhammer/engage-frontend-interview-assignment-mk-II.git"
