@@ -11,12 +11,19 @@ document.body.appendChild(app.view);
 PIXI.loader
   .add("background", "images/background.png")
   .add("guy", "images/guy.png")
+  .add("button", "images/button.png")
   .load(setup);
   
-let backgroundSprite, guySprite;
+let backgroundSprite, guySprite, buttonSprite;
 
 function setup() {
   backgroundSprite = new PIXI.Sprite(PIXI.loader.resources["background"].texture);
+  
+  buttonSprite = new PIXI.Sprite(PIXI.loader.resources["button"].texture);
+  buttonSprite.anchor.set(0.5, 1);
+  buttonSprite.scale.set(0.2, 0.2);
+  buttonSprite.x = app.renderer.width / 2;
+  buttonSprite.y = app.renderer.height;
 
   guySprite = new PIXI.Sprite(PIXI.loader.resources["guy"].texture);
   guySprite.anchor.set(0.5, 0.5);
@@ -56,6 +63,7 @@ function setup() {
   app.stage.addChild(backgroundSprite);
   app.stage.addChild(guySprite);
   app.stage.addChild(gPath);
+  app.stage.addChild(buttonSprite);
   
   app.ticker.add(delta => animationLoop(delta));
 }
