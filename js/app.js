@@ -17,6 +17,8 @@ PIXI.loader
 let backgroundSprite, guySprite, buttonSprite, tween, i,
   path = new PIXI.tween.TweenPath(),
   gPath = new PIXI.Graphics(),
+  mazeContainer = new PIXI.Container(),
+  buttonContainer = new PIXI.Container(),
   isReversed = false,
   tweenTime = 5000,
   tweenLoop = false,
@@ -54,13 +56,16 @@ for (i = 0; i < waypoints.length; i++) {
 }
 
 function setup() {
+  let appWidth = app.renderer.width,
+    appHeight = app.renderer.height;
+
   backgroundSprite = new PIXI.Sprite(PIXI.loader.resources["background"].texture);
 
   buttonSprite = new PIXI.Sprite(PIXI.loader.resources["button"].texture);
   buttonSprite.anchor.set(0.5, 1);
   buttonSprite.scale.set(buttonScale, buttonScale);
-  buttonSprite.x = app.renderer.width / 2;
-  buttonSprite.y = app.renderer.height;
+  buttonSprite.x = appWidth / 2;
+  buttonSprite.y = appHeight;
   buttonSprite.interactive = true;
   buttonSprite.buttonMode = true;
   buttonSprite.click = function() {
@@ -77,20 +82,32 @@ function setup() {
   tween.time = tweenTime;
   tween.loop = tweenLoop;
 
-  app.stage.addChild(backgroundSprite);
-  app.stage.addChild(guySprite);
-  app.stage.addChild(buttonSprite);
+  mazeContainer.pivot.set(appWidth / 2, appHeight / 2);
+  mazeContainer.x = appWidth / 2;
+  mazeContainer.y = appHeight / 2;
+  mazeContainer.addChild(backgroundSprite);
+  mazeContainer.addChild(guySprite);
+  
+  buttonContainer.addChild(buttonSprite);
+  
+  app.stage.addChild(mazeContainer);
+  app.stage.addChild(buttonContainer);
 
   //Path debug
   gPath.lineStyle(5, 0x00FF00, 1);
   gPath.drawPath(path);
-  //app.stage.addChild(gPath);
+  //mazeContainer.addChild(gPath);
   
   app.ticker.add(delta => animationLoop());
 }
 
 function animationLoop() {
   PIXI.tweenManager.update();
+  
+  //rotate maze
+  mazeContainer.rotation += 0.005;
+  //counter rotate guy
+  guySprite.rotation -= 0.005;
 }
 
 function setGuySpriteOrientation(isReversed) {
