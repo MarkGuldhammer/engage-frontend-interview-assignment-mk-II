@@ -8,84 +8,74 @@ let app = new PIXI.Application({
 
 document.body.appendChild(app.view);
 
-PIXI.loader
-  .add("background", "images/background.png")
-  .add("guy", "images/guy.png")
-  .add("button", "images/button.png")
-  .load(setup);
-  
-let backgroundSprite, guySprite, buttonSprite, isReversed = false;
+let backgroundSprite, guySprite, buttonSprite, tween, i,
+  path = new PIXI.tween.TweenPath(),
+  gPath = new PIXI.Graphics();
+  isReversed = false,
+  tweenTime = 5000,
+  tweenLoop = false,
+  buttonScale = 0.2,
+  waypoints = [
+    {x: 110, y: 100},
+    {x: 715, y: 100},
+    {x: 715, y: 470},
+    {x: 155, y: 470},
+    {x: 155, y: 140},
+    {x: 675, y: 140},
+    {x: 675, y: 430},
+    {x: 190, y: 430},
+    {x: 190, y: 175},
+    {x: 630, y: 175},
+    {x: 630, y: 390},
+    {x: 230, y: 390},
+    {x: 230, y: 210},
+    {x: 595, y: 210},
+    {x: 595, y: 360},
+    {x: 270, y: 360},
+    {x: 270, y: 245},
+    {x: 560, y: 245},
+    {x: 560, y: 330},
+    {x: 320, y: 330}
+  ];
+
+for (i = 0; i < waypoints.length; i++) {
+  let waypoint = waypoints[i];
+  if (i === 0) {
+    path.moveTo(waypoint.x, waypoint.y);
+  } else {
+    path.lineTo(waypoint.x, waypoint.y);
+  }
+}
 
 function setup() {
   backgroundSprite = new PIXI.Sprite(PIXI.loader.resources["background"].texture);
-  
+
   buttonSprite = new PIXI.Sprite(PIXI.loader.resources["button"].texture);
   buttonSprite.anchor.set(0.5, 1);
-  buttonSprite.scale.set(0.2, 0.2);
+  buttonSprite.scale.set(buttonScale, buttonScale);
   buttonSprite.x = app.renderer.width / 2;
   buttonSprite.y = app.renderer.height;
   buttonSprite.interactive = true;
-  buttonSprite.cursor = "pointer";
+  buttonSprite.buttonMode = true;
   buttonSprite.click = function() {
-    if (tween.active) {
-      isReversed = !isReversed;
-      setGuySpriteOrientation(isReversed);
-      
-      tween.reset();
-      tween.pathReverse = isReversed;
-      tween.start();
-    } else if (tween.isEnded) {
-      isReversed = !isReversed;
-      setGuySpriteOrientation(isReversed);
-
-      tween.reset();
-      tween.pathReverse = isReversed;
-      tween.start();
-    } else {
-      tween.start();
-    }
+    startButtonClicked();
   };
 
   guySprite = new PIXI.Sprite(PIXI.loader.resources["guy"].texture);
   guySprite.anchor.set(0.5, 0.5);
 
-  var path = new PIXI.tween.TweenPath();
-  path.moveTo(110, 100);
-  path.lineTo(715, 100);
-  path.lineTo(715, 470);
-  path.lineTo(155, 470);
-  path.lineTo(155, 140);
-  path.lineTo(675, 140);
-  path.lineTo(675, 430);
-  path.lineTo(190, 430);
-  path.lineTo(190, 175);
-  path.lineTo(630, 175);
-  path.lineTo(630, 390);
-  path.lineTo(230, 390);
-  path.lineTo(230, 210);
-  path.lineTo(595, 210);
-  path.lineTo(595, 360);
-  path.lineTo(270, 360);
-  path.lineTo(270, 245);
-  path.lineTo(560, 245);
-  path.lineTo(560, 330);
-  path.lineTo(320, 330);
-
-  var gPath = new PIXI.Graphics();
   gPath.lineStyle(5, 0x00FF00, 1);
   gPath.drawPath(path);
 
-  var tween = PIXI.tweenManager.createTween(guySprite);
+  tween = PIXI.tweenManager.createTween(guySprite);
   tween.path = path;
-  tween.time = 5000;
-  tween.loop = false;
-  //tween.pathReverse = true;
-  //tween.start();
-  
+  tween.time = tweenTime;
+  tween.loop = tweenLoop;
+
   app.stage.addChild(backgroundSprite);
   app.stage.addChild(guySprite);
-  app.stage.addChild(gPath);
   app.stage.addChild(buttonSprite);
+  //app.stage.addChild(gPath);
   
   app.ticker.add(delta => animationLoop());
 }
@@ -101,3 +91,22 @@ function setGuySpriteOrientation(isReversed) {
     guySprite.scale.x = 1;
   }
 }
+
+function startButtonClicked() {
+  if (tween.active || tween.isEnded) {
+    isReversed = !isReversed;
+    setGuySpriteOrientation(isReversed);
+
+    tween.reset();
+    tween.pathReverse = isReversed;
+    tween.start();
+  } else {
+    tween.start();
+  }
+}
+
+PIXI.loader
+  .add("background", "images/background.png")
+  .add("guy", "images/guy.png")
+  .add("button", "images/button.png")
+  .load(setup);
