@@ -87,23 +87,23 @@ function setup() {
   mazeContainer.y = appHeight / 2;
   mazeContainer.addChild(backgroundSprite);
   mazeContainer.addChild(guySprite);
-  
+
   buttonContainer.addChild(buttonSprite);
-  
+
   app.stage.addChild(mazeContainer);
   app.stage.addChild(buttonContainer);
 
   //Path debug
-  gPath.lineStyle(5, 0x00FF00, 1);
-  gPath.drawPath(path);
-  //mazeContainer.addChild(gPath);
+  /*gPath.lineStyle(5, 0x00FF00, 1);
+  //gPath.drawPath(path);
+  mazeContainer.addChild(gPath);*/
   
   app.ticker.add(delta => animationLoop());
 }
 
 function animationLoop() {
   PIXI.tweenManager.update();
-  
+
   //rotate maze
   mazeContainer.rotation += 0.005;
   //counter rotate guy
