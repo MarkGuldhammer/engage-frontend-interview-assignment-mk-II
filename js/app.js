@@ -8,9 +8,15 @@ let app = new PIXI.Application({
 
 document.body.appendChild(app.view);
 
+PIXI.loader
+  .add("background", "images/background.png")
+  .add("guy", "images/guy.png")
+  .add("button", "images/button.png")
+  .load(setup);
+
 let backgroundSprite, guySprite, buttonSprite, tween, i,
   path = new PIXI.tween.TweenPath(),
-  gPath = new PIXI.Graphics();
+  gPath = new PIXI.Graphics(),
   isReversed = false,
   tweenTime = 5000,
   tweenLoop = false,
@@ -63,9 +69,8 @@ function setup() {
 
   guySprite = new PIXI.Sprite(PIXI.loader.resources["guy"].texture);
   guySprite.anchor.set(0.5, 0.5);
-
-  gPath.lineStyle(5, 0x00FF00, 1);
-  gPath.drawPath(path);
+  guySprite.x = waypoints[0].x;
+  guySprite.y = waypoints[0].y;
 
   tween = PIXI.tweenManager.createTween(guySprite);
   tween.path = path;
@@ -75,6 +80,10 @@ function setup() {
   app.stage.addChild(backgroundSprite);
   app.stage.addChild(guySprite);
   app.stage.addChild(buttonSprite);
+
+  //Path debug
+  gPath.lineStyle(5, 0x00FF00, 1);
+  gPath.drawPath(path);
   //app.stage.addChild(gPath);
   
   app.ticker.add(delta => animationLoop());
@@ -104,9 +113,3 @@ function startButtonClicked() {
     tween.start();
   }
 }
-
-PIXI.loader
-  .add("background", "images/background.png")
-  .add("guy", "images/guy.png")
-  .add("button", "images/button.png")
-  .load(setup);
