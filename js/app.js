@@ -23,6 +23,7 @@ let backgroundSprite, guySprite, buttonSprite, tween, i,
   tweenTime = 5000,
   tweenLoop = false,
   buttonScale = 0.2,
+  rotationSpeed = 0.005;
   waypoints = [
     {x: 110, y: 100},
     {x: 715, y: 100},
@@ -105,9 +106,9 @@ function animationLoop() {
   PIXI.tweenManager.update();
 
   //rotate maze
-  mazeContainer.rotation += 0.005;
+  mazeContainer.rotation += rotationSpeed;
   //counter rotate guy
-  guySprite.rotation -= 0.005;
+  guySprite.rotation -= rotationSpeed;
 }
 
 function setGuySpriteOrientation(isReversed) {
