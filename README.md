@@ -1,17 +1,14 @@
-# Job interview assignment
-We kindly ask you to solve the task below. By solving and submitting this assignment you provide us with insights in how you solve real-world problems. What we will be looking at are topics such as: structuring of code, use of VCS, selection of 3rd party libraries, documentation etc.
+# The solution
 
-## The task
+The solution uses npm to easily add more packages and plugins later. The project requires a webserver to avoid problems loading locally stored images, which was a problem in Chrome which was used during development.
+The "Start" button activated the animation, and restarts the animation when Guy reaches the Goal. The tween animation is done using the pixi-tween plugin.
 
-Implement in Pixi.js a scene featuring the background in "background.png". Implement in the scene the green guy in "guy.png" and let him appear at the "Start" spot. Make an animation which causes the guy to traverse the black path until he reaches the "Goal" spot. Add a button to the scene which causes the guy to change destination to the "Start" spot. Repeatedly clicking the button should make the guy alternate between moving towards the start and the goal.
+# Plugins
 
-- Use Pixi.js as the language. Feel free to use plugins you deem appropriate.
+- pixi-tween 0.2.0
 
-Please employ whatever technique you deem suitable to increase the realism of the animation.
+# To-dos
 
-Bonus task (not required): Make the entire scene (except the button) rotate slowly around its center. 
-
-## Expectations
-Make a copy of this repo. Solve the task below. Push your code to a public repository, and send us the link as a reply to our email.
-
-Your solution should include a short readme describing your solution, how to use/test it and any final considerations such as known errors, next steps etc.
+- Guy is teleported to Start/Goal when pressing the "Start" button while the tween animation is active. Should instead just stop, and start moving in the opposite direction.
+- Add sprite animations to Guy when he is idle or moving.
+- Add text field which changes the time of the tween animation and maybe a dropdown to add/change the easing of the tween.
