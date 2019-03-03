@@ -20,7 +20,7 @@ let backgroundSprite, guySprite, buttonSprite, tween, i,
   mazeContainer = new PIXI.Container(),
   buttonContainer = new PIXI.Container(),
   isReversed = false,
-  tweenTime = 5000,
+  tweenTime = 10000,
   tweenLoop = false,
   buttonScale = 0.2,
   rotationSpeed = 0.005;
